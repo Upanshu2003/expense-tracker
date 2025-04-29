@@ -32,7 +32,7 @@ const Hero = () => {
       />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full h-full flex flex-col md:flex-row items-center justify-center px-6 md:px-20">
+      <div className="relative z-10 lg:mt-0 mt-12 w-full h-full flex flex-col md:flex-row items-center justify-center px-6 md:px-20">
         
         {/* Text Side */}
         <motion.div

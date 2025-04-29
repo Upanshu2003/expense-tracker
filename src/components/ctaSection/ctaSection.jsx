@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import CountUp from 'react-countup';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext'; 
 
 const CTASection = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate('/register', { state: { email } });
+  };
 
   return (
     <div className="relative w-full py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-900">
-   
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -left-4 -top-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
         <div className="absolute -right-4 -bottom-4 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -29,41 +38,39 @@ const CTASection = () => {
             Start your journey to financial freedom today.
           </p>
 
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="relative w-full group">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="w-full px-6 py-4 bg-white/10 border-2 border-purple-400/30 rounded-full text-white 
-                placeholder-purple-300 
-                focus:outline-none 
-                focus:ring-4 
-                focus:ring-purple-500/50 
-                focus:border-purple-500 
-                focus:bg-white/20
-                transition-all duration-300 ease-in-out"
-              />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-20 group-focus-within:opacity-20 -z-10 transition-opacity duration-300"></div>
-            </div>
-            <button className="whitespace-nowrap px-8 py-4 
-              bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 
-              bg-size-200 bg-pos-0 hover:bg-pos-100
-              rounded-full text-white font-semibold text-lg 
-              transform-gpu
-              transition-all duration-1000 ease-out
-              hover:scale-110 hover:-translate-y-1
-              hover:shadow-2xl hover:shadow-purple-500/30 
-              active:scale-95 active:duration-150"
+          {!isAuthenticated && (
+            <motion.form 
+              onSubmit={handleSubmit}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
             >
-              Get Started Free
-            </button>
-          </motion.div>
+              <div className="relative w-full group">
+                <input 
+                  type="email" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email" 
+                  className="w-full px-6 py-4 bg-white/10 border-2 border-purple-400/30 rounded-full text-white 
+                    placeholder-purple-300 focus:outline-none focus:ring-4 focus:ring-purple-500/50 
+                    focus:border-purple-500 focus:bg-white/20 transition-all duration-300"
+                />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 
+                  opacity-0 group-hover:opacity-20 group-focus-within:opacity-20 -z-10 transition-opacity duration-300">
+                </div>
+              </div>
+              <button 
+                type="submit"
+                className="whitespace-nowrap px-8 py-4 rounded-3xl !bg-pink-500 text-white font-semibold text-lg 
+                  transition-all duration-300 ease-in-out hover:scale-105 hover:-translate-y-1 
+                  hover:shadow-2xl hover:shadow-purple-500/30 active:scale-95"
+              >
+                Get Started Free
+              </button>
+            </motion.form>
+          )}
 
           <motion.div 
             className="mt-12 flex flex-wrap justify-center gap-8 text-purple-200"
