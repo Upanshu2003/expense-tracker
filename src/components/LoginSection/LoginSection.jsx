@@ -33,6 +33,7 @@ export default function Login() {
     setLoading(true);
     try {
       const { user } = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      console.log('Login response:', user); // Debug log
       if (!user.emailVerified) throw new Error("Please verify your email before logging in");
 
       window.localStorage.setItem('userData', JSON.stringify({
@@ -40,9 +41,11 @@ export default function Login() {
         email: user.email,
         emailVerified: user.emailVerified
       }));
+      console.log('Token saved:', user.uid); // Debug log
       navigate("/dashboard");
     } catch (error) {
       setError(error.message || "Failed to login. Please try again.");
+      console.error('Login error:', error.message); // Debug log
     } finally {
       setLoading(false);
     }
@@ -64,6 +67,7 @@ export default function Login() {
       navigate("/dashboard");
     } catch (error) {
       setError("Failed to sign in with Google");
+      console.error('Login error:', error.message); // Debug log
     } finally {
       setLoading(false);
     }

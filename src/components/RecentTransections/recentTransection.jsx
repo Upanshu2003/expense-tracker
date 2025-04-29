@@ -152,10 +152,10 @@ export default function RecentTransactions() {
           <h2 className="text-3xl md:text-4xl font-bold text-white">Recent Transactions</h2>
         </div>
         
-        <div className="flex justify-end mb-6 md:mb-8">
+        <div className="flex justify-center md:justify-end mb-6 md:mb-8">
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 transition-all rounded-xl text-gray-900 font-bold shadow-lg shadow-yellow-400/20"
+            className="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 transition-all rounded-xl text-white/90 font-bold shadow-lg shadow-yellow-400/20"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
@@ -232,7 +232,7 @@ export default function RecentTransactions() {
         {isModalOpen && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
             <div className="bg-gradient-to-br from-purple-900/90 to-indigo-900/90 p-8 rounded-2xl w-full max-w-md border border-purple-500/30 backdrop-blur-md shadow-xl">
-              <h3 className="text-2xl font-bold text-white mb-6 text-center">
+              <h3 className="text-2xl font-bold !text-white mb-6 text-center">
                 {editingTransaction ? 'Edit Transaction' : 'Add New Expense'}
               </h3>
               {error && <p className="text-red-400 mb-4 text-center">{error}</p>}

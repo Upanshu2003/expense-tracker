@@ -47,7 +47,7 @@ const Actions = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           <button 
-            onClick={() => navigate('/recent-transactions')}
+            onClick={() => navigate('/expenses')}
             className="group relative flex flex-col items-center p-8 rounded-2xl bg-gradient-to-r from-purple-600/20 to-indigo-600/20 backdrop-blur-lg border-2 border-purple-500/30 hover:border-purple-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/25 overflow-hidden outline-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -73,7 +73,7 @@ const Actions = () => {
         {/* Monthly Expenses Section */}
         <button 
           onClick={() => navigate('/insights')}
-          className="w-full bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/30 hover:bg-white/20 transition-all duration-300 hover:border-purple-400 hover:shadow-xl hover:shadow-purple-500/25"
+          className="w-full !bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/30 hover:bg-white/20 transition-all duration-300 hover:border-purple-400 hover:shadow-xl hover:shadow-purple-500/25"
         >
           <div className="flex items-center justify-between">
             <div className="text-left flex-1">

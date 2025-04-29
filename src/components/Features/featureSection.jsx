@@ -9,6 +9,9 @@ export default function FeatureSection() {
     { title: "Expense Tracking", description: "Easily log and track your daily expenses." },
     { title: "Category Insights", description: "Visualize spending by categories." },
     { title: "Monthly Reports", description: "Get clear monthly expense reports." },
+    { title: "Budget Planning", description: "Set and track your monthly budget goals." },
+    { title: "Export Data", description: "Export your financial data in multiple formats." },
+    { title: "Smart Alerts", description: "Get notifications for unusual spending patterns." },
   ];
 
   useEffect(() => {
@@ -65,14 +68,15 @@ export default function FeatureSection() {
             <div
               key={index}
               ref={(el) => (featureRefs.current[index] = el)}
-              className="opacity-0 translate-y-8 p-6 
+              className={`opacity-0 translate-y-8 p-6 
                 bg-black/30 border border-purple-500 
                 backdrop-blur-lg rounded-2xl 
                 transform-gpu 
                 transition-all duration-700 ease-out
                 hover:scale-110 hover:border-purple-300 
                 hover:shadow-xl hover:shadow-purple-500/40 
-                hover:-translate-y-1"
+                hover:-translate-y-1
+                ${index >= 3 ? 'hidden md:block' : ''}`}
             >
               <h3 className="text-xl mb-3 text-purple-200 font-semibold">{feature.title}</h3>
               <p className="text-purple-100">{feature.description}</p>
