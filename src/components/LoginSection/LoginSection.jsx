@@ -34,6 +34,12 @@ export default function Login() {
     try {
       const { user } = await signInWithEmailAndPassword(auth, formData.email, formData.password);
       if (!user.emailVerified) throw new Error("Please verify your email before logging in");
+
+      window.localStorage.setItem('userData', JSON.stringify({
+        uid: user.uid,
+        email: user.email,
+        emailVerified: user.emailVerified
+      }));
       navigate("/dashboard");
     } catch (error) {
       setError(error.message || "Failed to login. Please try again.");
@@ -47,16 +53,16 @@ export default function Login() {
     try {
       const provider = new GoogleAuthProvider();
       const { user } = await signInWithPopup(auth, provider);
-      const userDoc = await getDoc(doc(db, "users", user.uid));
-      if (!userDoc.exists()) {
-        await setDoc(doc(db, "users", user.uid), {
-          name: user.displayName,
-          email: user.email,
-          uid: user.uid,
-        });
-      }
+      
+      // Store Google user data with explicit JSON.stringify
+      window.localStorage.setItem('userData', JSON.stringify({
+        uid: user.uid,
+        email: user.email,
+        name: user.displayName
+      }));
+      console.log('Stored Google user:', user.uid); // Debug log
       navigate("/dashboard");
-    } catch {
+    } catch (error) {
       setError("Failed to sign in with Google");
     } finally {
       setLoading(false);
